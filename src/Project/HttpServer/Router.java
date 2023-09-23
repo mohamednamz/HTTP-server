@@ -7,26 +7,32 @@ import java.util.Objects;
 public class Router {
     List<Route> routeList = new ArrayList<>();
 
-    public Route matchRoute(HTTPMethod httpMethod, String path) {
+    public Route matchRoute(HTTPMethod httpMethod, String path, HTTPVersion version) {
 
         Route httpRequest = new Route();
         httpRequest.httpMethod = httpMethod;
         httpRequest.path = path;
 
-        for (int i = 0; i < routeList.size(); i++) {
-            if (Objects.equals(routeList.get(i).httpMethod, httpRequest.httpMethod) && Objects.equals(routeList.get(i).path, httpRequest.path)) {
-                return httpRequest;
+        if (Objects.equals(version.version, "HTTP/1.1")) {
+
+            for (int i = 0; i < routeList.size(); i++) {
+                if (Objects.equals(routeList.get(i).httpMethod.verb, httpRequest.httpMethod.verb)) {
+                    for (int x = 0; x < routeList.size(); x++) {
+                        if (Objects.equals(routeList.get(x).path, httpRequest.path)) {
+                            return httpRequest;
+                        }
+                    }
+                }
             }
         }
-        // From the request line -- create the HTTPRequest object
-        // From the HTTPRequest object you can manipulate the routes
-
         return null;
     }
 
     public void addRoute(String httpMethod, String path) {
 
         Route httpRequest = new Route();
+        httpRequest.httpMethod = new HTTPMethod();
+
 
         httpRequest.httpMethod.verb = httpMethod;
         httpRequest.path = path;
