@@ -18,6 +18,8 @@ public class Main {
 
         Route route = router.matchRoute(request.httpMethod, request.path.absolutePath, request.version);
 
+        boolean doesQueryMatch = router.matchQuery(request.path.absolutePath, request.path.query);
+
         HTTPRequest request2 = httpRequestParser.parseRequest("GET /testing?name=Namz HTTP/1.1");
 
         Route route2 = router.matchRoute(request.httpMethod, request.path.absolutePath, request.version);

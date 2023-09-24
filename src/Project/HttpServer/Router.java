@@ -22,11 +22,27 @@ public class Router {
                             return httpRequest;
                         }
                     }
+                    return null;
                 }
             }
         }
         return null;
     }
+
+    public boolean matchQuery(String path, String query) {
+        Path searchQuery = new Path();
+        searchQuery.queryMap();
+
+        for (int i = 0; i < searchQuery.queryMap.size(); i++) {
+
+            if (Objects.equals(searchQuery.queryMap.get("/testing"), query)) {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
 
     public void addRoute(String httpMethod, String path) {
 
