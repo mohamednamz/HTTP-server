@@ -5,6 +5,7 @@ import java.util.List;
 
 public class HTTPRequestParser {
     HTTPRequest request = new HTTPRequest();
+    Route route = new Route();
 
     /**
      * function(requestLine) {
@@ -28,11 +29,18 @@ public class HTTPRequestParser {
         request.path.query = "";
 
         String[] arr = {request.httpMethod.verb, request.path.absolutePath, request.path.query, request.version.version};
-        int arrPos = 0;
 
         char[] requestLineAsArray = requestLine.toCharArray();
 
         List<Character> charList = new ArrayList<>();
+
+        return getRequest(charList,requestLineAsArray,arr);
+
+    }
+
+    public HTTPRequest getRequest(List<Character> charList, char[] requestLineAsArray, String[] arr) {
+
+        int arrPos = 0;
 
         for (int i = 0; i < requestLineAsArray.length; i++) {
             if (requestLineAsArray[i] == ' ' || requestLineAsArray[i] == '?') {
@@ -44,6 +52,8 @@ public class HTTPRequestParser {
                 charList.clear();
             } else {
                 charList.add(requestLineAsArray[i]);
+
+               // if (charList.get(i) )
             }
         }
         for (int x = 0; x < charList.size(); x++) {
@@ -61,22 +71,3 @@ public class HTTPRequestParser {
     }
 
 }
-
-//if (requestLineAsArray[i] != ' ') {
-//        if (requestLineAsArray[i] != '?') {
-//        charList.add(requestLineAsArray[i]);
-//        } else {
-//        for (int x = 0; x < charList.size(); x++) {
-//        arr[arrPos] = arr[arrPos] + charList.get(x).toString();
-//        }
-//        arrPos++;
-//        charList.clear();
-//        }
-//        if (requestLineAsArray[i] == requestLineAsArray[requestLineAsArray.length - 1]) {
-//        for (int x = 0; x < charList.size(); x++) {
-//        arr[arrPos] = arr[arrPos] + charList.get(x).toString();
-//        }
-//        charList.clear();
-//        }
-//        }
-//        }

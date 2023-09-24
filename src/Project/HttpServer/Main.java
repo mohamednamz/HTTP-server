@@ -27,6 +27,12 @@ public class Main {
         HTTPRequest request3 = httpRequestParser.parseRequest("GET /testing?name=Namz&age=25 HTTP/1.1");
 
         HashMap<String, String> map = request3.path.queryMap; // Check this query map
+
+
+        Route route5 = new Route();
+
+        route5.initialiseRouteList();
+        route5.getRouteList('G',0);
     }
 
 
