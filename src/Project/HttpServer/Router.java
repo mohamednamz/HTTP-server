@@ -29,20 +29,6 @@ public class Router {
         return null;
     }
 
-    public boolean matchQuery(String path, String query) {
-        Path searchQuery = new Path();
-        searchQuery.queryMap();
-
-        for (int i = 0; i < searchQuery.queryMap.size(); i++) {
-
-            if (Objects.equals(searchQuery.queryMap.get("/testing"), query)) {
-                return true;
-            }
-        }
-        return false;
-
-    }
-
 
     public void addRoute(String httpMethod, String path) {
 
@@ -56,4 +42,14 @@ public class Router {
         routeList.add(httpRequest);
 
     }
+
+    public void get(String path) {
+        addRoute("GET",path);
+    }
+
+    public void post(String path) {
+        addRoute("POST",path);
+    }
+
+
 }
